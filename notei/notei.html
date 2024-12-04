@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes App with Folder and File Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .note-container {
+            margin-bottom: 20px;
+        }
+        .note-space {
+            margin-bottom: 10px;
+        }
+        textarea {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        img {
+            max-width: 100%;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Notes App with Folder and Image Upload</h1>
+
+    <div class="note-container">
+        <h3>Create/Manage Notes</h3>
+        <button onclick="createNote()">Create New Note</button>
+        <button onclick="viewNotes()">View All Notes</button>
+        <br><br>
+
+        <div>
+            <label for="noteIndex">Enter Note Space (1-10): </label>
+            <input type="number" id="noteIndex" min="1" max="10">
+        </div>
+        <div>
+            <label for="noteContent">Enter Content: </label>
+            <textarea id="noteContent" rows="4" cols="50"></textarea>
+        </div>
+        <div>
+            <label for="imageUpload">Upload Image: </label>
+            <input type="file" id="imageUpload" accept="image/*" onchange="previewImage(event)">
+            <br>
+            <img id="imagePreview" src="" alt="Image Preview" style="display:none;">
+        </div>
+
+        <button onclick="saveNote()">Save Note</button>
+
+        <div id="noteList"></div>
+    </div>
+
+    <script>
+        const apiUrl = "http://localhost:3000";  // Change to your server URL
+
+        // Function to create a new note
+        function createNote() {
+            const index = document.getElementById('noteIndex').value;
+            if (index < 1 || index > 10) {
+                alert('Please enter a note space between 1 and 10.');
+                return;
+            }
+
+            document.getElementById('noteContent').value = '';  // Reset content field
+            resetImagePreview();
+        }
+
+        // Image preview function
+        function previewImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imgElement = document.getElementById('imagePreview');
+                    imgElement.src = e.target.result;
+                    imgElement.style.display = 'block'; // Show the image preview
+                };
+                reader.readAsDataURL(file); // Convert image file to base64 string
+            }
+        }
+
+        // Reset the image preview
+        function resetImagePreview() {
+            document.getElementById('imagePreview').style.display = 'none';
+            document.getElementById('imageUpload').value = ''; // Clear file input
+        }
+
+        // Save note with text and image
+        function saveNote() {
+            const index = document.getElementById('noteIndex').value;
+            const content = document.getElementById('noteContent').value;
+            const image = document.getElementById('imagePreview').src;
+
+            if (index < 1 || index > 10) {
+                alert('Please enter a note space between 1 and 10.');
+                return;
+            }
+
+            const noteData = {
+                index: index,
+                content: content,
+                image: image
+            };
+
+            // Send the data to the backend
+            fetch(`${apiUrl}/saveNote`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(noteData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Note saved successfully!');
+                resetImagePreview();
+            })
+            .catch(error => console.error('Error saving note:', error));
+        }
+
+        // View all notes (fetch and display them from the backend)
+        function viewNotes() {
+            fetch(`${apiUrl}/viewNotes`)
+                .then(response => response.json())
+                .then(notes => {
+                    let notesList = "<h3>All Notes:</h3>";
+                    notes.forEach(note => {
+                        notesList += `
+                            <div class="note-space">
+                                <strong>Note ${note.index}:</strong>
+                                <p>${note.content}</p>
+                                <img src="${note.image}" alt="Note image" style="max-width: 200px;">
+                            </div>
+                        `;
+                    });
+                    document.getElementById('noteList').innerHTML = notesList;
+                })
+                .catch(error => console.error('Error viewing notes:', error));
+        }
+    </script>
+</body>
+</html>

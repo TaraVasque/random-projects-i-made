@@ -15,6 +15,7 @@ Welcome to the **Random Projects I Made** repository! This collection showcases 
 
 4. **Note Pad Like App Made with HTML, CSS, JavaScript**
    - A simple and functional note-taking app. Create, edit, and save your notes directly in your browser.
+   - this is s still being worked on and doesnt currently work properly, if you find any errors please tell me
 
 5. **AI Text Bot Made with Groq AI**
    - An AI-powered text bot that can engage in conversations and provide responses based on Groq AI technology.

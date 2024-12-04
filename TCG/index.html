@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Card Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game-board">
+        <div id="player-info">
+            <h2>Player</h2>
+            <p>Health: <span id="player-health">20</span></p>
+            <div id="player-hand" class="card-container"></div>
+        </div>
+        <div id="opponent-info">
+            <h2>Opponent</h2>
+            <p>Health: <span id="opponent-health">20</span></p>
+            <div id="opponent-hand" class="card-container"></div>
+        </div>
+        <div id="battlefield" class="card-container"></div>
+        <button id="end-turn">End Turn</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survivor Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="gameCanvas"></canvas>
+    <div id="pauseMenu" class="menu">
+        <h2>Pause Menu</h2>
+        <button onclick="resumeGame()">Resume</button>
+        <button onclick="saveGame()">Save Game</button>
+        <button onclick="loadGame()">Load Game</button>
+        <button onclick="openSettings()">Settings</button>
+    </div>
+    <div id="settingsMenu" class="menu">
+        <h2>Settings</h2>
+        <label for="gameWidth">Game Width:</label>
+        <input type="number" id="gameWidth" value="800"><br>
+        <label for="gameHeight">Game Height:</label>
+        <input type="number" id="gameHeight" value="600"><br>
+        <label for="playerSpeed">Player Speed:</label>
+        <input type="number" id="playerSpeed" value="5"><br>
+        <label for="enemySpeed">Enemy Speed:</label>
+        <input type="number" id="enemySpeed" value="2"><br>
+        <button onclick="applySettings()">Apply</button>
+        <button onclick="closeSettings()">Back</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

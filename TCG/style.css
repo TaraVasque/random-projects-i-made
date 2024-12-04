@@ -1,0 +1,58 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+#game-board {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card {
+    width: 100px;
+    height: 150px;
+    border: 1px solid #000;
+    margin: 5px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.card::after {
+    content: attr(data-rarity);
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 0.8em;
+    color: #fff;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+.card[data-rarity="Common"]::after {
+    background-color: #ccc;
+}
+
+.card[data-rarity="Uncommon"]::after {
+    background-color: #6c6;
+}
+
+.card[data-rarity="Rare"]::after {
+    background-color: #66c;
+}
+
+.card[data-rarity="Legendary"]::after {
+    background-color: #c60;
+}
+
+#player-info, #opponent-info {
+    margin: 10px;
+}

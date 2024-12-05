@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Note</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="taskbar">
+        <button onclick="window.location.href='create.html'">Create</button>
+        <button onclick="window.location.href='view.html'">View</button>
+        <button onclick="window.location.href='save.html'">Save</button>
+    </div>
+
+    <div id="view">
+        <h2>View Note</h2>
+        <input type="text" id="view-note-name" placeholder="Enter Note Name" />
+        <button id="view-note-btn">View Note</button>
+        <div id="view-note-content"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
